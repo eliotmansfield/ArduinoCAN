@@ -2,16 +2,18 @@
 Arduino MKR Zero with Arduino CANBUS Shield with 2.8" ILI9341 SPI Display
 This is what's live in the cosworth now 01/09/2024
 Pinout:
-Display     MKR Zero              Cable
-VCC         VCC (3.3v)            red 
-GND         GND                   black
-CS          PIN5                  yellow
-Reset       Reset (next to gnd)   blue
-DC          PIN4                  brown
-SDI(MOSI)   PIN8(marked MOSI)     white
-SCLK        PIN9(marked SCK)      orange
-LED         VCC (3.3v)            green
-SDO(MISO)   PIN10(marked MISO)    purple
+Display     MKR Zero             
+VCC         VCC (3.3v)            
+GND         GND                   
+CS          PIN5                 
+Reset       Reset (next to gnd)   
+DC          PIN4                  
+SDI(MOSI)   PIN8(marked MOSI)    
+SCLK        PIN9(marked SCK)      
+LED         VCC (3.3v)           
+SDO(MISO)   PIN10(marked MISO)    
+
+Momentry switch between digital input 6 and ground to change pages
 
 Version 1.0 - Baseline 22/10
 Version 1.1 - Adding extra knock data frames
@@ -283,8 +285,6 @@ void processCANFrame(CANFrame& frame) {
       tft.setTextSize(TEXTSIZE);
       tft.setCursor(COLA, LINE11);
       tft.println(ect1, 0);
-
-
 
 
       //slot 4 - Calibration Select
