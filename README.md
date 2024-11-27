@@ -3,7 +3,7 @@ A repo containing code for an Arduino with a CAN adapter to read and display eng
 
 
 I started out with some code samples that accompany the can shields, which worked to a degree - but once you started sending more frames to the device you would end up with timing issues where frames would be arriving but the code was busy displaying the data and would therefore miss the new frames.
-I thought this was a CPU issue, so I changed from an UNO to a MKR0 board - it worked a bit better, but you could tell the problem wasn't solved.  I did look at using interupts instead, but it still seemed to have the same issue.
+I thought this was a CPU issue, so I changed from an UNO to a MKR0 board - it worked a bit better, but you could tell the problem wasn't solved.  I did look at using interrupts instead, but it still seemed to have the same issue.
 
 In the end I (well to be honest, ChatGPT did) refactored the code to wait for all the known frames to arrive and only then drop into the routine that displays the data before returning and waiting for another complete set of frames
 
@@ -34,7 +34,7 @@ Transmit Content (Not all are used)
 | 61D           | fuelDutyPri1   | act1           | ect1           | calSelect      |
 | 61E           | vbat           | limpmode       | runMode        | syncState      |
 | 61F           | cyl01Knock     | cyl02Knock     | cyl03Knock     | cyl04Knock     |
-| 620           |cyl01KnockIgnRtd|cyl01KnockIgnRtd|cyl01KnockIgnRtd|cyl01KnockIgnRtd|
+| 620           |cyl01KnockIgnRtd|cyl02KnockIgnRtd|cyl03KnockIgnRtd|cyl04KnockIgnRtd|
                 
 
 
@@ -50,7 +50,15 @@ Which frames to transmit - each frame has a "convert using xxx" explanation whic
 
 How often to transmit the frames  - could go faster
 
-![Frequency to transmit Frames](./docs/can-transmit-freq.png)
+![Frequency to transmit Frames](./docs/can-transmit-freq.png
+
+## Code Notes
+There's two folders which contain the code for the two different hardware types described below.  The Uno based unit doesn't have any spare digital inputs, so you cant read a pin to swap screens - there's a commented section to swap on a time period though.  You could use an analogue pin and use a 5k pull up and just look for a low analogue input value.
+
+The MKR Zero one is the one in my car and generally more up to date - but broadly they are almost identical apart from just the way the screen is initialised (i'm someone smarter than me could merge them into one codebase)
+
+- uno-tftshield-life-display-buffered-multiscreen
+- mkr0-life-display-buffered-multiscreen
 
 
 ## Hardware
@@ -58,7 +66,7 @@ How often to transmit the frames  - could go faster
 You have two options, solder free or soldering / diy.
 
 ### Arduino Uno using shields
-Simply plug them alltogether and you are done.  This is a 5V solution and uses descrete IO to drive the display NOT SPI - there are no spare digital pins left.
+Simply plug them altogether and you are done.  This is a 5V solution and uses discrete IO to drive the display NOT SPI - there are no spare digital pins left.
 - Arduino Uno R3
 - MCP2515 EF02037 TJA1050 CAN Bus Shield Receiver SPI Controller 
 - 3.5" TFT LCD 480x320 Display Shield for Arduino UNO R3 MEGA2560

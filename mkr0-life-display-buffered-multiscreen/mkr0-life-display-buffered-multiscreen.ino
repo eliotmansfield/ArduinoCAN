@@ -1,6 +1,9 @@
 /*
+Arduino CAN display for Life Racing / Syvecs ECU
+Eliot Mansfield 2024
+
 Arduino MKR Zero with Arduino CANBUS Shield with 2.8" ILI9341 SPI Display
-This is what's live in the cosworth now 01/09/2024
+
 Pinout:
 Display     MKR Zero             
 VCC         VCC (3.3v)            
@@ -13,10 +16,10 @@ SCLK        PIN9(marked SCK)
 LED         VCC (3.3v)           
 SDO(MISO)   PIN10(marked MISO)    
 
-Momentry switch between digital input 6 and ground to change pages
+Momentary switch between digital input 6 and ground to change pages
 
 Version 1.0 - Baseline 22/10
-Version 1.1 - Adding extra knock data frames
+Version 1.1 - Added FRAME33 knock retard frames
 */
 
 

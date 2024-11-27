@@ -1,6 +1,14 @@
-//https://www.syvecs.com/downloads/Syvecs_Parameters.pdf
-//Arduino UNO,Can Shield, TFT DISPLAY Shield
-// New Version that buffers the data - 5/9/2024 Eliot
+/*
+Arduino CAN display for Life Racing / Syvecs ECU
+Eliot Mansfield 2024
+
+Arduino Uno R3
+MCP2515 EF02037 TJA1050 CAN Bus Shield Receiver SPI Controller 
+3.5" TFT LCD 480x320 Display Shield for Arduino UNO R3 MEGA2560
+
+Version 1.0 - Baseline 22/10
+*/
+
 
 #include <SPI.h>
 #include <mcp2515.h>
@@ -49,7 +57,7 @@ MCUFRIEND_kbv tft;
 #define buttonpin 6  //pin used for input
 int currentcal = 13;  //initialise and store a known invalid cal, to force a correct cal to be populated on first loop.
 unsigned long previousMillis = 0;  // Store last time page was updated
-const long interval = 2000;        // 5-second interval
+const long interval = 2000;        // How many miliseconds to wait between screens
 int pageIndex = 0;                 // Current page index (0 = page 1, 1 = page 2)
 
 int buttonstatus=1;
@@ -121,7 +129,6 @@ void loop() {
       framesCollected++;
     }
 
-
     // Serial.print(canMsg.can_id, HEX);  // print ID
     // Serial.print(" ");
     // Serial.print(canMsg.can_dlc, HEX);  // print DLC
@@ -136,14 +143,9 @@ void loop() {
   }
 
 
-
-  // buttonstatus = digitalRead(8);
-  // Serial.print("buttonstatus ");
-  // Serial.println(buttonstatus);
-
-
-
-    // Check if it's time to change the page
+  // Uncomment this section if you want alternate between screen 1 and 2 automaticaly at "interval" milliseconds
+  
+  // Check if it's time to change the page
   // unsigned long currentMillis = millis();
   // if (currentMillis - previousMillis >= interval) {
   //   previousMillis = currentMillis;
