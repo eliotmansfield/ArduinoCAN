@@ -11,6 +11,9 @@ Typically with CAN bus, you would transmit fast changing data far more frequentl
 
 This code was written to display CAN data from my Life Racing F88RS, which is essentially the same as a Syvecs S8, in theory you should be able to adapt it to display data from any ECU if you know the CAN frame ID's and the data within - or you set your ECU to send the data in the same format as the Life ECU.
 
+Video of the display in action:
+[Youtube Video](https://youtu.be/lSFwLIXzhDM)
+
 ## Features
 - Multiple screens, press a button to toggle screens
 - Text changes colour for danger values: Oil Pressure, Injector Duty % and Knock retard
